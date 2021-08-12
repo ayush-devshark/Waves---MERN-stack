@@ -7,7 +7,7 @@ const routes = require('./routes');
 
 // MIDDLEWARE
 
-// json
+// json parse
 app.use(express.json());
 
 // sanitize
