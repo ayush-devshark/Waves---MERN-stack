@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const userSchema = mongoose.Schema({
@@ -62,6 +63,15 @@ userSchema.pre('save', async function (next) {
     }
     next();
 });
+
+userSchema.methods.generateAuthToken = function () {
+    let user = this;
+    const userObj = { sub: user._id.toHexString() };
+    const token = jwt.sign(userObj, process.env.JWT_SECRET, {
+        expiresIn: '1d',
+    });
+    return token;
+};
 
 // check email duplication
 userSchema.statics.emailTaken = async function (email) {
