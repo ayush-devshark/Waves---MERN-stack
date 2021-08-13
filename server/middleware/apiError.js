@@ -14,4 +14,17 @@ const handleError = (err, res) => {
     res.status(statusCode).json({ status: 'error', statusCode, message });
 };
 
-module.exports = { APIError, handleError };
+const convertToAPIError = (err, req, res, next) => {
+    let error = err;
+    if (!(error instanceof APIError)) {
+        const statusCode =
+            error.statusCode || error instanceof mongoose.Error
+                ? httpStatus.BAD_REQUEST
+                : httpStatus.INTERNAL_SERVER_ERROR;
+        const message = error.message || httpStatus[statusCode];
+        error = new APIError(statusCode, message);
+    }
+    next(error);
+};
+
+module.exports = { APIError, handleError, convertToAPIError };

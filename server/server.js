@@ -6,7 +6,7 @@ const xss = require('xss-clean');
 const mongoSanititize = require('express-mongo-sanitize');
 const routes = require('./routes');
 
-const { handleError } = require('./middleware/apiError');
+const { handleError, convertToAPIError } = require('./middleware/apiError');
 
 const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}?retryWrites=true&w=majority`;
 
@@ -28,7 +28,10 @@ app.use(mongoSanititize());
 // routes
 app.use('/api', routes);
 
-// error
+// Error
+//  For mongo, monogoose error
+app.use(convertToAPIError);
+
 app.use((err, req, res, next) => {
     handleError(err, res);
 });
