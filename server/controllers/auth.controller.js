@@ -1,4 +1,5 @@
 const { authService } = require('../services');
+const httpStatus = require('http-status');
 
 const authController = {
     register: async (req, res, next) => {
@@ -7,9 +8,11 @@ const authController = {
             const user = await authService.createUser(email, password);
             const token = await authService.genAuthToken(user);
 
-            res.cookie('x-access-token', token).status(200).send({ user });
+            res.cookie('x-access-token', token)
+                .status(httpStatus.CREATED)
+                .send({ user, token });
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     },
 
