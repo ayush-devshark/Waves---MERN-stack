@@ -64,6 +64,7 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
+// generate JWT token
 userSchema.methods.generateAuthToken = function () {
     let user = this;
     const userObj = { sub: user._id.toHexString() };
@@ -77,6 +78,13 @@ userSchema.methods.generateAuthToken = function () {
 userSchema.statics.emailTaken = async function (email) {
     const user = await this.findOne({ email });
     return !!user;
+};
+
+userSchema.methods.comparePassword = async function (candidatePassword) {
+    // candidate password = unhashed password
+    const user = this;
+    const match = await bcrypt.compare(candidatePassword, user.password);
+    return match;
 };
 
 const User = mongoose.model('User', userSchema);
