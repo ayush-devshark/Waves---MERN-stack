@@ -12,6 +12,7 @@ const findUserById = async _id => {
 
 const updateUserProfile = async req => {
     try {
+        // we can add check for giving user access to only data they need to modify.
         const user = await User.findOneAndUpdate(
             { _id: req.user._id },
             { $set: { ...req.body.data } },
@@ -26,4 +27,28 @@ const updateUserProfile = async req => {
     }
 };
 
-module.exports = { findUserByEmail, findUserById, updateUserProfile };
+const updateUserEmail = async req => {
+    try {
+        if (await User.emailTaken(req.body.newEmail)) {
+            throw new APIError(httpStatus.BAD_REQUEST, 'Sorry email taken');
+        }
+        const user = await User.findOneAndUpdate(
+            { _id: req.user._id, email: req.user.email },
+            { $set: { email: req.body.newEmail, varified: false } },
+            { new: true }
+        );
+        if (!user) {
+            throw new APIError(httpStatus.NOT_FOUND, 'User not found');
+        }
+        return user;
+    } catch (err) {
+        throw err;
+    }
+};
+
+module.exports = {
+    findUserByEmail,
+    findUserById,
+    updateUserProfile,
+    updateUserEmail,
+};
