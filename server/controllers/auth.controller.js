@@ -34,10 +34,6 @@ const authController = {
     isAuth: async (req, res, next) => {
         res.json(req.user);
     },
-
-    cat: async (req, res, next) => {
-        res.json({ ok: 'yes' });
-    },
 };
 
 module.exports = authController;

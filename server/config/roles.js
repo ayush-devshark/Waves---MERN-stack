@@ -1,17 +1,20 @@
 const AccessControl = require('accesscontrol');
 
+const allRights = {
+    'create:any': ['*'],
+    'read:any': ['*'],
+    'update:any': ['*'],
+    'delete:any': ['*'],
+};
+
 let grantsObject = {
     admin: {
-        cat: {
-            'create:any': ['*'],
-            'read:any': ['*'],
-            'update:any': ['*'],
-            'delete:any': ['*'],
-        },
+        profile: allRights,
     },
     user: {
-        cat: {
-            'read:any': ['*'],
+        profile: {
+            'read:own': ['*', '!password', '!_id'],
+            'update:own': ['*'],
         },
     },
 };
