@@ -8,8 +8,12 @@ router
     .get(auth('readOwn', 'profile'), usersController.profile)
     .patch(auth('updateOwn', 'profile'), usersController.updateProfile);
 
-router
-    .route('/email')
-    .patch(auth('updateOwn', 'profile'), usersController.updateEmail);
+router.patch(
+    '/email',
+    auth('updateOwn', 'profile'),
+    usersController.updateEmail
+);
+
+router.get('/verify', usersController.verifyAccount);
 
 module.exports = router;
