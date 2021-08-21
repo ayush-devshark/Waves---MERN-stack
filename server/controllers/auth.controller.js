@@ -1,4 +1,4 @@
-const { authService } = require('../services');
+const { authService, emailService } = require('../services');
 const httpStatus = require('http-status');
 
 const authController = {
@@ -7,6 +7,8 @@ const authController = {
             const { email, password } = req.body;
             const user = await authService.createUser(email, password);
             const token = await authService.genAuthToken(user);
+
+            await emailService.registerEmail(email, user);
 
             res.cookie('x-access-token', token)
                 .status(httpStatus.CREATED)

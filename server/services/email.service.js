@@ -34,7 +34,20 @@ const registerEmail = async (useremail, user) => {
                 outro: 'Need help or have any questions, Just reply to email. We would be happy to help',
             },
         };
+
+        let emailBody = mailGenerator.generate(email);
+        let message = {
+            from: process.env.EMAIL,
+            to: useremail,
+            subject: 'Welcome to waves',
+            html: emailBody,
+        };
+
+        await transporter.sendMail(message);
+        return true;
     } catch (err) {
         throw err;
     }
 };
+
+module.exports = { registerEmail };
