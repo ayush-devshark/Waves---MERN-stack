@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const validateToken = async token => {
-    jwt.verify(token, process.env.JWT_SECRET);
+    return jwt.verify(token, process.env.JWT_SECRET);
 };
 
 const findUserByEmail = async email => {
@@ -13,7 +13,7 @@ const findUserByEmail = async email => {
 };
 
 const findUserById = async _id => {
-    return await User.findOne(_id);
+    return await User.findOne({ _id });
 };
 
 const updateUserProfile = async req => {
@@ -40,7 +40,7 @@ const updateUserEmail = async req => {
         }
         const user = await User.findOneAndUpdate(
             { _id: req.user._id, email: req.user.email },
-            { $set: { email: req.body.newEmail, varified: false } },
+            { $set: { email: req.body.newEmail, verified: false } },
             { new: true }
         );
         if (!user) {
