@@ -1,4 +1,6 @@
+const { APIError } = require('../middleware/apiError');
 const Brand = require('../models/brand');
+const httpStatus = require('http-status');
 
 const addBrand = async brandname => {
     try {
@@ -10,4 +12,17 @@ const addBrand = async brandname => {
     }
 };
 
-module.exports = { addBrand };
+const getBrand = async id => {
+    try {
+        const brand = await Brand.findById(id);
+        if (!brand) {
+            throw new APIError(httpStatus.NOT_FOUND, 'Brand not found');
+            // BUG Not able to catch erroes.
+        }
+        return brand;
+    } catch (err) {
+        throw err;
+    }
+};
+
+module.exports = { addBrand, getBrand };

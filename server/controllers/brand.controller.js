@@ -9,6 +9,15 @@ const brandController = {
             next(err);
         }
     },
+
+    getBrand: async (req, res, next) => {
+        try {
+            const brand = await brandService.getBrand(req.params.id);
+            res.json({ brand });
+        } catch (err) {
+            throw err;
+        }
+    },
 };
 
 module.exports = brandController;
