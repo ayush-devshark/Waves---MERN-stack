@@ -35,8 +35,16 @@ const deleteBrandById = async id => {
     }
 };
 
-const getBrands = async () => {
+const getBrands = async args => {
     try {
+        let order = args.order ? args.order : 'asc';
+        let limit = args.limit ? args.limit : 5;
+        const brands = Brand.find()
+            .sort([['_id', order]])
+            .limit(limit);
+        if (!brands)
+            throw new APIError(httpStatus.NOT_FOUND, 'Brands not found');
+        return brands;
     } catch (err) {
         throw err;
     }

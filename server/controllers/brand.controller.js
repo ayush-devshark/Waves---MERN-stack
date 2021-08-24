@@ -30,7 +30,7 @@ const brandController = {
 
     getBrands: async (req, res, next) => {
         try {
-            const brands = await brandService.getBrands();
+            const brands = await brandService.getBrands(req.body);
             res.json(brands);
         } catch (err) {
             next(err);
