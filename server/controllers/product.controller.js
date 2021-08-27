@@ -19,6 +19,19 @@ const productController = {
             next(err);
         }
     },
+
+    updateProductById: async (req, res, next) => {
+        try {
+            const id = req.params.id;
+            const product = await productService.updateProductById(
+                id,
+                req.body
+            );
+            res.json(product);
+        } catch (err) {
+            next(err);
+        }
+    },
 };
 
 module.exports = productController;

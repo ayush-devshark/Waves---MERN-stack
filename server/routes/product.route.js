@@ -11,6 +11,9 @@ router.post(
     productController.addProduct
 );
 
-router.route('/product/:id').get(productController.getProductById);
+router
+    .route('/product/:id')
+    .get(productController.getProductById)
+    .patch(auth('updateAny', 'product'), productController.updateProductById);
 
 module.exports = router;

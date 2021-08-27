@@ -24,4 +24,20 @@ const getProductById = async _id => {
     }
 };
 
-module.exports = { addProduct, getProductById };
+const updateProductById = async (_id, body) => {
+    try {
+        const product = await Product.findOneAndUpdate(
+            { _id },
+            { $set: body },
+            { new: true }
+        );
+        if (!product) {
+            throw new APIError(httpStatus.NOT_FOUND, 'Product not found');
+        }
+        return product;
+    } catch (err) {
+        throw err;
+    }
+};
+
+module.exports = { addProduct, getProductById, updateProductById };
