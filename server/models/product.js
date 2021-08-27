@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const productSchema = mongoose.Schema({
-    models: {
+    model: {
         required: [true, 'You need a guitar model'],
         type: String,
         unique: 1,
@@ -42,4 +43,4 @@ const productSchema = mongoose.Schema({
 
 const Product = mongoose.model('Product', productSchema);
 
-module.exports = { Product };
+module.exports = Product;
