@@ -52,9 +52,22 @@ const deleteProductById = async _id => {
     }
 };
 
+const getAllProducts = async req => {
+    try {
+        const products = await Product.find({})
+            .populate('brand')
+            .sort([[req.query.sortBy, req.query.order]])
+            .limit(parseInt(req.query.limit));
+        return products;
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
     addProduct,
     getProductById,
     updateProductById,
     deleteProductById,
+    getAllProducts,
 };

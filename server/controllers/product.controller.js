@@ -42,6 +42,14 @@ const productController = {
             next(err);
         }
     },
+    getAllProducts: async (req, res, next) => {
+        try {
+            const products = await productService.getAllProducts(req);
+            res.json(products);
+        } catch (err) {
+            next(err);
+        }
+    },
 };
 
 module.exports = productController;
