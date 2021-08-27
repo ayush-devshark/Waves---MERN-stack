@@ -9,6 +9,16 @@ const productController = {
             next(err);
         }
     },
+
+    getProductById: async (req, res, next) => {
+        try {
+            const id = req.params.id;
+            const product = await productService.getProductById(id);
+            res.json(product);
+        } catch (err) {
+            next(err);
+        }
+    },
 };
 
 module.exports = productController;
