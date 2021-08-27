@@ -32,6 +32,16 @@ const productController = {
             next(err);
         }
     },
+
+    deleteProductById: async (req, res, next) => {
+        try {
+            const id = req.params.id;
+            const product = await productService.deleteProductById(id);
+            res.json(product);
+        } catch (err) {
+            next(err);
+        }
+    },
 };
 
 module.exports = productController;

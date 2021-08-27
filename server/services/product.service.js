@@ -40,4 +40,21 @@ const updateProductById = async (_id, body) => {
     }
 };
 
-module.exports = { addProduct, getProductById, updateProductById };
+const deleteProductById = async _id => {
+    try {
+        const product = await Product.findByIdAndRemove(_id);
+        if (!product) {
+            throw new APIError(httpStatus.NOT_FOUND, 'Product not found');
+        }
+        return product;
+    } catch (err) {
+        throw err;
+    }
+};
+
+module.exports = {
+    addProduct,
+    getProductById,
+    updateProductById,
+    deleteProductById,
+};
