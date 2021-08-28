@@ -64,10 +64,28 @@ const getAllProducts = async req => {
     }
 };
 
+const paginateProducts = async req => {
+    try {
+        let aggQueryArr = [];
+
+        let aggQuery = Product.aggregate(aggQueryArr);
+        const options = {
+            page: req.body.page,
+            limit: 2,
+            sort: { date: 'desc' },
+        };
+        const products = await Product.aggregatePaginate(aggQuery, options);
+        return products;
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
     addProduct,
     getProductById,
     updateProductById,
     deleteProductById,
     getAllProducts,
+    paginateProducts,
 };

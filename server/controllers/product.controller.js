@@ -50,6 +50,15 @@ const productController = {
             next(err);
         }
     },
+
+    paginateProducts: async (req, res, next) => {
+        try {
+            const products = await productService.paginateProducts(req);
+            res.json(products);
+        } catch (err) {
+            next(err);
+        }
+    },
 };
 
 module.exports = productController;

@@ -18,4 +18,6 @@ router
     .delete(auth('deleteAny', 'product'), productController.deleteProductById);
 
 router.get('/all', productController.getAllProducts);
+
+router.post('/paginate/all', productController.paginateProducts);
 module.exports = router;
