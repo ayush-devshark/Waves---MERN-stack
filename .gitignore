@@ -11,6 +11,8 @@ client/node_modules
 client/.pnp
 client/.pnp.js
 
+client/public/images
+
 
 # production
 client/build
