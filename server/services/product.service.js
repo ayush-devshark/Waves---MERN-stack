@@ -69,11 +69,13 @@ const paginateProducts = async req => {
     try {
         let aggQueryArr = [];
 
+        // query - model
         if (req.body.keywords && req.body.keywords != '') {
             const re = new RegExp(`${req.body.keywords}`, 'gi');
             aggQueryArr.push({ $match: { model: { $regex: re } } });
         }
 
+        // query - brand
         if (req.body.brand && req.body.brand.length > 0) {
             const newBrandsArr = req.body.brand.map(brandId =>
                 mongoose.Types.ObjectId(brandId)
@@ -81,9 +83,36 @@ const paginateProducts = async req => {
             aggQueryArr.push({ $match: { brand: { $in: newBrandsArr } } });
         }
 
+        // query - frets
         if (req.body.frets && req.body.frets.length > 0) {
             aggQueryArr.push({ $match: { frets: { $in: req.body.frets } } });
         }
+
+        // query - price range
+        if (
+            (req.body.min && req.body.min > 0) ||
+            (req.body.max && req.body.max < 5000)
+        ) {
+            if (req.body.min) {
+                aggQueryArr.push({ $match: { price: { $gt: req.body.min } } });
+            }
+            if (req.body.max) {
+                aggQueryArr.push({ $match: { price: { $lt: req.body.max } } });
+            }
+        }
+
+        // populate brand
+        aggQueryArr.push(
+            {
+                $lookup: {
+                    from: 'brands',
+                    localField: 'brand',
+                    foreignField: '_id',
+                    as: 'brand',
+                },
+            },
+            { $unwind: '$brand' }
+        );
 
         let aggQuery = Product.aggregate(aggQueryArr);
         const options = {
