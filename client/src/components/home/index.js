@@ -1,7 +1,12 @@
 import React from 'react';
+import Featured from './Featured';
 
 const Home = () => {
-    return <>Home</>;
+    return (
+        <>
+            <Featured />
+        </>
+    );
 };
 
 export default Home;
