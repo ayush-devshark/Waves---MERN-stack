@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SlimPromotion from 'utils/promotions/slimBlock';
 import Featured from './Featured';
+import { useDispatch } from 'react-redux';
+import { productsBySort } from 'store/actions/products-actions';
 
 const slimPromotion = {
     img: '/images/featured/featured_home_3.jpg',
@@ -11,6 +13,27 @@ const slimPromotion = {
 };
 
 const Home = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(
+            productsBySort({
+                limit: 4,
+                sortBy: 'itemSold ',
+                order: 'desc',
+                where: 'bySold',
+            })
+        );
+        dispatch(
+            productsBySort({
+                limit: 4,
+                sortBy: 'date',
+                order: 'desc',
+                where: 'byDate',
+            })
+        );
+    }, [dispatch]);
+
     return (
         <>
             <Featured />
