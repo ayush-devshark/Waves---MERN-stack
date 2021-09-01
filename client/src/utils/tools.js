@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AddShoopingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 export const WavesButton = props => {
     let template = '';
@@ -16,6 +17,17 @@ export const WavesButton = props => {
                 >
                     {props.title}
                 </Link>
+            );
+            break;
+        case 'bag_link':
+            template = (
+                <div
+                    className='bag_link'
+                    onClick={() => props.runAction()}
+                    style={{ ...props.style }}
+                >
+                    <AddShoopingCartIcon style={{ fontSize: props.iconSize }} />
+                </div>
             );
             break;
         default:

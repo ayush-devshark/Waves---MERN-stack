@@ -4,6 +4,7 @@ import Featured from './Featured';
 import { useDispatch, useSelector } from 'react-redux';
 import { productsBySort } from 'store/actions/products-actions';
 import CardBlock from 'utils/products/cardblocks';
+import Loader from 'utils/loader';
 
 const slimPromotion = {
     img: '/images/featured/featured_home_3.jpg',
@@ -20,7 +21,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(
             productsBySort({
-                limit: 2,
+                limit: 4,
                 sortBy: 'itemSold ',
                 order: 'desc',
                 where: 'bySold',
@@ -39,10 +40,17 @@ const Home = () => {
     return (
         <>
             <Featured />
-            {bySold && (
+            {bySold ? (
                 <CardBlock items={bySold} title='Best Selling Guitars' />
+            ) : (
+                <Loader />
             )}
             <SlimPromotion items={slimPromotion} />
+            {byDate ? (
+                <CardBlock items={byDate} title='Latest guitars on the shop' />
+            ) : (
+                <Loader />
+            )}
         </>
     );
 };
