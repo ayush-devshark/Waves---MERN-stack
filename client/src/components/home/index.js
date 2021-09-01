@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import SlimPromotion from 'utils/promotions/slimBlock';
 import Featured from './Featured';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { productsBySort } from 'store/actions/products-actions';
+import CardBlock from 'utils/products/cardblocks';
 
 const slimPromotion = {
     img: '/images/featured/featured_home_3.jpg',
@@ -14,11 +15,12 @@ const slimPromotion = {
 
 const Home = () => {
     const dispatch = useDispatch();
+    const { bySold, byDate } = useSelector(state => state.products);
 
     useEffect(() => {
         dispatch(
             productsBySort({
-                limit: 4,
+                limit: 2,
                 sortBy: 'itemSold ',
                 order: 'desc',
                 where: 'bySold',
@@ -37,6 +39,9 @@ const Home = () => {
     return (
         <>
             <Featured />
+            {bySold && (
+                <CardBlock items={bySold} title='Best Selling Guitars' />
+            )}
             <SlimPromotion items={slimPromotion} />
         </>
     );
