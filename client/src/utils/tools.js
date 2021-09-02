@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import AddShoopingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 export const WavesButton = props => {
@@ -41,5 +42,18 @@ export const renderCardImage = image => {
         return image[0];
     } else {
         return '/images/image_not_availble.png';
+    }
+};
+
+export const showToast = (type, message) => {
+    switch (type) {
+        case 'SUCCESS':
+            toast.success(message, { position: toast.POSITION.BOTTOM_RIGHT });
+            break;
+        case 'ERROR':
+            toast.error(message, { position: toast.POSITION.BOTTOM_RIGHT });
+            break;
+        default:
+            return false;
     }
 };
