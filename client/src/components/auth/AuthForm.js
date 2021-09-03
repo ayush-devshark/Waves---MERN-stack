@@ -5,7 +5,7 @@ import { errorhelper } from 'utils/tools';
 import Loader from 'utils/loader';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { userRegister } from 'store/actions/users.actions';
+import { userRegister, userSignin } from 'store/actions/users.actions';
 
 import { TextField, Button } from '@material-ui/core';
 
@@ -37,7 +37,7 @@ const AuthForm = props => {
         if (props.formType) {
             dispatch(userRegister(values));
         } else {
-            // sign_in
+            dispatch(userSignin(values));
         }
     };
 

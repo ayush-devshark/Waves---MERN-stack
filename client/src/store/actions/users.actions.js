@@ -21,3 +21,20 @@ export const userRegister = values => {
         }
     };
 };
+
+export const userSignin = values => {
+    return async dispatch => {
+        try {
+            const user = await axios.post('api/auth/signin', {
+                email: values.email,
+                password: values.password,
+            });
+            dispatch(
+                actions.userAuthenticate({ data: user.data.user, auth: true })
+            );
+            dispatch(actions.successGlobal('Welcome Back!'));
+        } catch (err) {
+            dispatch(actions.errorGlobal(err.response.data.message));
+        }
+    };
+};
