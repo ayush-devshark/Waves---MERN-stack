@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { productsBySort } from 'store/actions/products-actions';
+import { productsBySort } from 'store/actions/products.actions';
 import Featured from './Featured';
 import CardBlock from 'utils/products/cardblocks';
 import SlimPromotion from 'utils/promotions/slimBlock';

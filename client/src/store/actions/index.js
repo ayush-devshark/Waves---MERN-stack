@@ -4,10 +4,16 @@ import {
     ERROR_GLOBAL,
     SUCCESS_GLOBAL,
     CLEAR_NOTIFICATIONS,
+    AUTH_USER
 } from 'store/types';
 
-// Products Actions
+// User Action
+export const userAuthenticate = user => ({
+    type: AUTH_USER,
+    payload: user,
+});
 
+// Products Actions
 export const productsBySold = data => ({
     type: GET_PROD_BY_SOLD,
     payload: data,
@@ -19,7 +25,6 @@ export const productsByDate = data => ({
 });
 
 // Notifications
-
 export const errorGlobal = msg => ({
     type: ERROR_GLOBAL,
     payload: msg,

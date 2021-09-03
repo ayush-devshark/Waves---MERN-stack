@@ -57,3 +57,11 @@ export const showToast = (type, message) => {
             return false;
     }
 };
+
+export const errorhelper = (formik, value) => ({
+    error: formik.errors[value] && formik.touched[value] ? true : false,
+    helpersText:
+        formik.errors[value] && formik.touched[value]
+            ? formik.errors[value]
+            : null,
+});
