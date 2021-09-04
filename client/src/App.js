@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import MainLayout from 'hoc/MainLayout';
+import Loader from 'utils/loader';
+
+import { userIsAuth, userSignOut } from 'store/actions/users.actions';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Header from 'components/navigation/Header';
 import Footer from 'components/navigation/Footer';
 import Home from 'components/home';
-import MainLayout from 'hoc/MainLayout';
 import RegisterLogin from 'components/auth';
-import Loader from 'utils/loader';
-import { userIsAuth, userSignOut } from 'store/actions/users.actions';
 
-import { useDispatch, useSelector } from 'react-redux';
+import Dashboard from 'components/dashboard';
 
 function App(props) {
     const [loading, setLoading] = useState(true);
@@ -38,6 +41,7 @@ function App(props) {
                     <Header users={users} signoutUser={signoutUser} />
                     <MainLayout>
                         <Switch>
+                            <Route path='/dashboard' component={Dashboard} />
                             <Route path='/sign_in' component={RegisterLogin} />
                             <Route path='/' exact component={Home} />
                         </Switch>
