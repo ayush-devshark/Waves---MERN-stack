@@ -1,4 +1,4 @@
-import { AUTH_USER } from '../types';
+import { AUTH_USER, SIGN_OUT } from '../types';
 
 let DEFAULT_USER_STATE = {
     data: {
@@ -20,6 +20,13 @@ const userReducer = (state = DEFAULT_USER_STATE, { type, payload }) => {
                 ...state,
                 data: { ...state.data, ...payload.data },
                 auth: payload.auth,
+            };
+
+        case SIGN_OUT:
+            return {
+                ...state,
+                data: { ...DEFAULT_USER_STATE.data },
+                auth: false,
             };
         default:
             return state;

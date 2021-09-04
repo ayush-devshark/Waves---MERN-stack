@@ -6,7 +6,7 @@ import Home from 'components/home';
 import MainLayout from 'hoc/MainLayout';
 import RegisterLogin from 'components/auth';
 import Loader from 'utils/loader';
-import { userIsAuth } from 'store/actions/users.actions';
+import { userIsAuth, userSignOut } from 'store/actions/users.actions';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,6 +14,10 @@ function App(props) {
     const [loading, setLoading] = useState(true);
     const users = useSelector(state => state.users);
     const dispatch = useDispatch();
+
+    const signoutUser = () => {
+        dispatch(userSignOut());
+    };
 
     useEffect(() => {
         dispatch(userIsAuth());
@@ -31,7 +35,7 @@ function App(props) {
                 <Loader full={true} />
             ) : (
                 <>
-                    <Header />
+                    <Header users={users} signoutUser={signoutUser} />
                     <MainLayout>
                         <Switch>
                             <Route path='/sign_in' component={RegisterLogin} />

@@ -59,3 +59,11 @@ export const userIsAuth = () => {
         }
     };
 };
+
+export const userSignOut = () => {
+    return async dispatch => {
+        removeTokenCooke();
+        dispatch(actions.userSignOut());
+        dispatch(actions.successGlobal('Good Bye !!'));
+    };
+};
