@@ -4,7 +4,7 @@ import DashboardLayout from 'hoc/DashboardLayout';
 const UserDashboard = () => {
     return (
         <>
-            <DashboardLayout></DashboardLayout>
+            <DashboardLayout title='Overview'>userDahbard</DashboardLayout>
         </>
     );
 };
