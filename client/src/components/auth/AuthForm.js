@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { errorhelper } from 'utils/tools';
+import { errorHelper } from 'utils/tools';
 import Loader from 'utils/loader';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,12 +13,12 @@ const AuthForm = props => {
     const [loading, setLoading] = useState(false);
 
     const notifications = useSelector(state => state.notifications);
-    const users = useSelector(state => state.users);
+    // const users = useSelector(state => state.users);
     const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
-            email: 'test@email.com',
+            email: 'test23@email.com',
             password: 'testing1234',
         },
         validationSchema: Yup.object({
@@ -63,7 +63,7 @@ const AuthForm = props => {
                                 label='Enter your email'
                                 variant='outlined'
                                 {...formik.getFieldProps('email')}
-                                {...errorhelper(formik, 'email')}
+                                {...errorHelper(formik, 'email')}
                             />
                         </div>
                         <div className='form-group'>
@@ -74,7 +74,7 @@ const AuthForm = props => {
                                 variant='outlined'
                                 type='password'
                                 {...formik.getFieldProps('password')}
-                                {...errorhelper(formik, 'password')}
+                                {...errorHelper(formik, 'password')}
                             />
                         </div>
                         <Button
