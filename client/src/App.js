@@ -13,6 +13,7 @@ import Home from 'components/home';
 import RegisterLogin from 'components/auth';
 
 import Dashboard from 'components/dashboard';
+import UserInfo from 'components/dashboard/user/info';
 
 function App(props) {
     const [loading, setLoading] = useState(true);
@@ -42,6 +43,10 @@ function App(props) {
                     <Header users={users} signoutUser={signoutUser} />
                     <MainLayout>
                         <Switch>
+                            <Route
+                                path='/dashboard/user/user_info'
+                                component={AuthGuard(UserInfo)}
+                            />
                             <Route
                                 path='/dashboard'
                                 component={AuthGuard(Dashboard)}

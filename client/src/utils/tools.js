@@ -61,7 +61,7 @@ export const showToast = (type, message) => {
 
 export const errorHelper = (formik, value) => ({
     error: formik.errors[value] && formik.touched[value] ? true : false,
-    helpersText:
+    helperstext:
         formik.errors[value] && formik.touched[value]
             ? formik.errors[value]
             : null,
