@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { errorHelper } from 'utils/tools';
 import { useDispatch } from 'react-redux';
+import { userUpdateProfile } from 'store/actions/users.actions';
 
 import { TextField, Button } from '@material-ui/core';
 
@@ -27,7 +28,7 @@ const UserInfo = ({ users }) => {
                 .required('This field is required'),
         }),
         onSubmit: values => {
-            console.log(values);
+            dispatch(userUpdateProfile(values));
         },
     });
 

@@ -10,3 +10,4 @@ export const CLEAR_NOTIFICATIONS = 'clear_notifications';
 // User
 export const AUTH_USER = 'auth_user';
 export const SIGN_OUT = 'sign_out';
+export const UPDATE_USER_PROFILE = 'update_user_profile';

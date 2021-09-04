@@ -6,6 +6,7 @@ import {
     CLEAR_NOTIFICATIONS,
     AUTH_USER,
     SIGN_OUT,
+    UPDATE_USER_PROFILE,
 } from 'store/types';
 
 // User Action
@@ -16,6 +17,11 @@ export const userAuthenticate = user => ({
 
 export const userSignOut = () => ({
     type: SIGN_OUT,
+});
+
+export const userUpdateProfile = userData => ({
+    type: UPDATE_USER_PROFILE,
+    payload: userData,
 });
 
 // Products Actions

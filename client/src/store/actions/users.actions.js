@@ -67,3 +67,27 @@ export const userSignOut = () => {
         dispatch(actions.successGlobal('Good Bye !!'));
     };
 };
+
+export const userUpdateProfile = data => {
+    return async (dispatch, getState) => {
+        try {
+            const profile = await axios.patch(
+                '/api/users/profile',
+                {
+                    data: data,
+                },
+                getAuthHeader()
+            );
+            const userData = {
+                ...getState().users.data,
+                firstname: profile.data.firstname,
+                lastname: profile.data.lastname,
+            };
+
+            dispatch(actions.userUpdateProfile(userData));
+            dispatch(actions.successGlobal('Profile successfully updated!'));
+        } catch (err) {
+            dispatch(actions.errorGlobal(err.response.data.message));
+        }
+    };
+};
