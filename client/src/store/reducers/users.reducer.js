@@ -1,4 +1,9 @@
-import { AUTH_USER, SIGN_OUT, UPDATE_USER_PROFILE } from '../types';
+import {
+    AUTH_USER,
+    SIGN_OUT,
+    UPDATE_USER_PROFILE,
+    USER_CHANGE_EMAIL,
+} from '../types';
 
 let DEFAULT_USER_STATE = {
     data: {
@@ -31,6 +36,9 @@ const userReducer = (state = DEFAULT_USER_STATE, { type, payload }) => {
 
         case UPDATE_USER_PROFILE:
             return { ...state, data: { ...payload } };
+
+        case USER_CHANGE_EMAIL:
+            return { ...state, data: { ...state.data, email: payload } };
         default:
             return state;
     }

@@ -35,12 +35,12 @@ const updateUserProfile = async req => {
 
 const updateUserEmail = async req => {
     try {
-        if (await User.emailTaken(req.body.newEmail)) {
+        if (await User.emailTaken(req.body.newemail)) {
             throw new APIError(httpStatus.BAD_REQUEST, 'Sorry email taken');
         }
         const user = await User.findOneAndUpdate(
             { _id: req.user._id, email: req.user.email },
-            { $set: { email: req.body.newEmail, verified: false } },
+            { $set: { email: req.body.newemail, verified: false } },
             { new: true }
         );
         if (!user) {

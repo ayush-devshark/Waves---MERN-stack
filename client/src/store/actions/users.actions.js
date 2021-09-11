@@ -91,3 +91,26 @@ export const userUpdateProfile = data => {
         }
     };
 };
+
+export const userChangeEmail = data => {
+    return async dispatch => {
+        try {
+            await axios.patch(
+                '/api/users/email',
+                {
+                    email: data.email,
+                    newemail: data.newemail,
+                },
+                getAuthHeader()
+            );
+            dispatch(actions.userChangeEmail(data.newemail));
+            dispatch(
+                actions.successGlobal(
+                    'Email updated, Remeber to verify your account'
+                )
+            );
+        } catch (err) {
+            dispatch(actions.errorGlobal(err.response.data.message));
+        }
+    };
+};

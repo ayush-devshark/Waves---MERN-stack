@@ -18,7 +18,7 @@ const AuthForm = props => {
 
     const formik = useFormik({
         initialValues: {
-            email: 'test23@email.com',
+            email: 'test25@email.com',
             password: 'testing1234',
         },
         validationSchema: Yup.object({

@@ -7,6 +7,7 @@ import {
     AUTH_USER,
     SIGN_OUT,
     UPDATE_USER_PROFILE,
+    USER_CHANGE_EMAIL,
 } from 'store/types';
 
 // User Action
@@ -22,6 +23,11 @@ export const userSignOut = () => ({
 export const userUpdateProfile = userData => ({
     type: UPDATE_USER_PROFILE,
     payload: userData,
+});
+
+export const userChangeEmail = data => ({
+    type: USER_CHANGE_EMAIL,
+    payload: data,
 });
 
 // Products Actions
