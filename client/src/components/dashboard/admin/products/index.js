@@ -1,6 +1,8 @@
 import React, { useEffect, useReducer } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import DashboardLayout from 'hoc/DashboardLayout';
+import ProductsTable from './productsTable';
+
+import { useSelector, useDispatch } from 'react-redux';
 import { productsByPaginate } from 'store/actions/products.actions';
 
 const defaultValues = {
@@ -26,7 +28,15 @@ const AdminProducts = props => {
         dispatch(productsByPaginate(searchValues));
     }, [dispatch, searchValues]);
 
-    return <DashboardLayout>Say Someething ....</DashboardLayout>;
+    return (
+        <DashboardLayout title='Products'>
+            <div className='products_table'>
+                <div>Search</div>
+                <hr />
+                <ProductsTable products={products.byPaginate} />
+            </div>
+        </DashboardLayout>
+    );
 };
 
 export default AdminProducts;
