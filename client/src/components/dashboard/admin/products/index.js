@@ -1,6 +1,11 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import DashboardLayout from 'hoc/DashboardLayout';
 import ProductsTable from './productsTable';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { errorHelper } from 'utils/tools';
+import { TextField } from '@material-ui/core';
+import { Button } from 'react-bootstrap';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -30,6 +35,19 @@ const AdminProducts = props => {
         defaultValues
     );
 
+    const formik = useFormik({
+        initialValues: { keywords: '' },
+        validationSchema: Yup.object({
+            keywords: Yup.string()
+                .min(3, 'You need more than 3')
+                .max(10, 'Too long search word'),
+        }),
+        onSubmit: (values, { resetForm }) => {
+            setSearchValues({ keywords: values.keywords, page: 1 });
+            resetForm();
+        },
+    });
+
     const goToEdit = id => {
         props.history.push(`/dashboard/admin/edit_products/${id}`);
     };
@@ -51,6 +69,10 @@ const AdminProducts = props => {
         dispatch(productRemove(toRemove));
     };
 
+    const resetSearch = () => {
+        setSearchValues(defaultValues);
+    };
+
     useEffect(() => {
         dispatch(productsByPaginate(searchValues));
     }, [dispatch, searchValues]);
@@ -66,7 +88,26 @@ const AdminProducts = props => {
     return (
         <DashboardLayout title='Products'>
             <div className='products_table'>
-                <div>Search</div>
+                <div>
+                    <form className='mt-3' onSubmit={formik.handleSubmit}>
+                        <TextField
+                            style={{ width: '100%' }}
+                            name='keywords'
+                            label='Enter your search'
+                            variant='outlined'
+                            {...formik.getFieldProps('keywords')}
+                            {...errorHelper(formik, 'keywords')}
+                        />
+                    </form>
+                    <Button
+                        onClick={() => {
+                            resetSearch();
+                        }}
+                    >
+                        Reset Search
+                    </Button>
+                </div>
+
                 <hr />
                 <ProductsTable
                     removeModal={removeModal}
