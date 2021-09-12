@@ -1,5 +1,12 @@
 import axios from 'axios';
 import * as actions from '.';
+import {
+    getAuthHeader,
+    removeTokenCooke,
+    getTokenCookie,
+} from '../../utils/tools';
+
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export const productsBySort = ({ limit, sortBy, order, where }) => {
     return async dispatch => {
@@ -36,6 +43,18 @@ export const productsByPaginate = args => {
                 args
             );
             dispatch(actions.productsByPaginate(products.data));
+        } catch (err) {
+            dispatch(actions.errorGlobal(err.response.data.message));
+        }
+    };
+};
+
+export const productRemove = id => {
+    return async dispatch => {
+        try {
+            await axios.delete(`/api/products/product/${id}`, getAuthHeader());
+            dispatch(actions.productRemove());
+            dispatch(actions.successGlobal());
         } catch (err) {
             dispatch(actions.errorGlobal(err.response.data.message));
         }

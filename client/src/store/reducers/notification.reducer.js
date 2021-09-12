@@ -1,4 +1,9 @@
-import { ERROR_GLOBAL, SUCCESS_GLOBAL, CLEAR_NOTIFICATIONS } from '../types';
+import {
+    ERROR_GLOBAL,
+    SUCCESS_GLOBAL,
+    CLEAR_NOTIFICATIONS,
+    REMOVE_PRODUCT,
+} from '../types';
 
 const notificationReducer = (state = {}, { type, payload }) => {
     switch (type) {
@@ -8,6 +13,8 @@ const notificationReducer = (state = {}, { type, payload }) => {
             return { ...state, success: true, msg: payload };
         case CLEAR_NOTIFICATIONS:
             return {};
+        case REMOVE_PRODUCT:
+            return { ...state, removeArticle: true };
         default:
             return state;
     }

@@ -3,7 +3,10 @@ import DashboardLayout from 'hoc/DashboardLayout';
 import ProductsTable from './productsTable';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { productsByPaginate } from 'store/actions/products.actions';
+import {
+    productsByPaginate,
+    productRemove,
+} from 'store/actions/products.actions';
 
 const defaultValues = {
     keywords: '',
@@ -45,12 +48,20 @@ const AdminProducts = props => {
     };
 
     const handleRemove = () => {
-        alert(toRemove);
+        dispatch(productRemove(toRemove));
     };
 
     useEffect(() => {
         dispatch(productsByPaginate(searchValues));
     }, [dispatch, searchValues]);
+
+    useEffect(() => {
+        handleClose();
+        setRemoveModal(null);
+        if (notifications && notifications.removeArticle) {
+            dispatch(productsByPaginate(searchValues));
+        }
+    }, [dispatch, notifications, searchValues]);
 
     return (
         <DashboardLayout title='Products'>
