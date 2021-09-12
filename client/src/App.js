@@ -45,7 +45,7 @@ function App(props) {
                     <MainLayout>
                         <Switch>
                             <Route
-                                path='/dashboard/user/admin_products'
+                                path='/dashboard/admin/admin_products'
                                 component={AuthGuard(AdminProducts)}
                             />
                             <Route

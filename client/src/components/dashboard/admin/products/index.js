@@ -24,6 +24,14 @@ const AdminProducts = props => {
         defaultValues
     );
 
+    const goToEdit = id => {
+        props.history.push(`/dashboard/admin/edit_products/${id}`);
+    };
+
+    const goToPage = page => {
+        setSearchValues({ page: page });
+    };
+
     useEffect(() => {
         dispatch(productsByPaginate(searchValues));
     }, [dispatch, searchValues]);
@@ -33,7 +41,12 @@ const AdminProducts = props => {
             <div className='products_table'>
                 <div>Search</div>
                 <hr />
-                <ProductsTable products={products.byPaginate} />
+                <ProductsTable
+                    products={products.byPaginate}
+                    prev={page => goToPage(page)}
+                    next={page => goToPage(page)}
+                    goToEdit={id => goToEdit(id)}
+                />
             </div>
         </DashboardLayout>
     );
