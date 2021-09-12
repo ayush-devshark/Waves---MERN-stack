@@ -1,4 +1,8 @@
-import { GET_PROD_BY_SOLD, GET_PROD_BY_DATE } from '../types';
+import {
+    GET_PROD_BY_SOLD,
+    GET_PROD_BY_DATE,
+    GET_PROD_PAGINATE,
+} from '../types';
 
 let DEFAULT_PRODUCTS_STATE = {};
 
@@ -8,6 +12,8 @@ const productsReducer = (state = DEFAULT_PRODUCTS_STATE, { type, payload }) => {
             return { ...state, bySold: payload };
         case GET_PROD_BY_DATE:
             return { ...state, byDate: payload };
+        case GET_PROD_PAGINATE:
+            return { ...state, byPaginate: payload };
         default:
             return state;
     }

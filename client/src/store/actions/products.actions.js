@@ -27,3 +27,17 @@ export const productsBySort = ({ limit, sortBy, order, where }) => {
         }
     };
 };
+
+export const productsByPaginate = args => {
+    return async dispatch => {
+        try {
+            const products = await axios.post(
+                `/api/products/paginate/all`,
+                args
+            );
+            dispatch(actions.productsByPaginate(products.data));
+        } catch (err) {
+            dispatch(actions.errorGlobal(err.response.data.message));
+        }
+    };
+};
