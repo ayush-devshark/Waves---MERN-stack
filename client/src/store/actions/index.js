@@ -10,6 +10,7 @@ import {
     SIGN_OUT,
     UPDATE_USER_PROFILE,
     USER_CHANGE_EMAIL,
+    GET_ALL_BRANDS,
 } from 'store/types';
 
 // User Action
@@ -50,6 +51,12 @@ export const productsByPaginate = products => ({
 
 export const productRemove = () => ({
     type: REMOVE_PRODUCT,
+});
+
+// Brands
+export const getAllBrands = brands => ({
+    type: GET_ALL_BRANDS,
+    payload: brands,
 });
 
 // Notifications
