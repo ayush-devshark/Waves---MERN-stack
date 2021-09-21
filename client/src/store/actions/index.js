@@ -3,6 +3,8 @@ import {
     GET_PROD_BY_DATE,
     GET_PROD_PAGINATE,
     REMOVE_PRODUCT,
+    ADD_PRODUCT,
+    CLEAR_PRODUCT_ADD,
     ERROR_GLOBAL,
     SUCCESS_GLOBAL,
     CLEAR_NOTIFICATIONS,
@@ -51,6 +53,15 @@ export const productsByPaginate = products => ({
 
 export const productRemove = () => ({
     type: REMOVE_PRODUCT,
+});
+
+export const productAdd = product => ({
+    type: ADD_PRODUCT,
+    payload: product,
+});
+
+export const clearProductAdd = () => ({
+    type: CLEAR_PRODUCT_ADD,
 });
 
 // Brands

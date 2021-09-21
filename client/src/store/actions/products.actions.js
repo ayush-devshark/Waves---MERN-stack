@@ -60,3 +60,19 @@ export const productRemove = id => {
         }
     };
 };
+
+export const addProduct = data => {
+    return async dispatch => {
+        try {
+            const product = await axios.post(
+                '/api/products',
+                data,
+                getAuthHeader()
+            );
+            dispatch(actions.productAdd(product.data));
+            dispatch(actions.successGlobal());
+        } catch (err) {
+            dispatch(actions.errorGlobal(err.response.data.message));
+        }
+    };
+};

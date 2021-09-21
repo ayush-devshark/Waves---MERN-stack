@@ -7,6 +7,8 @@ import { validation } from './formValues';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllBrands } from 'store/actions/brands.actions';
+import { addProduct } from 'store/actions/products.actions';
+import { clearProductAdd } from 'store/actions';
 
 import {
     TextField,
@@ -37,13 +39,33 @@ const AddProduct = props => {
         },
         validationSchema: validation,
         onSubmit: values => {
-            console.log(values);
+            handleSubmit(values);
         },
     });
+
+    const handleSubmit = values => {
+        setLoading(true);
+        dispatch(addProduct(values));
+    };
+
+    useEffect(() => {
+        if (notifications && notifications.success) {
+            props.history.push('dashboard/admin/admin_products');
+        }
+        if (notifications && notifications.error) {
+            setLoading(false);
+        }
+    }, [notifications, props.history]);
 
     useEffect(() => {
         dispatch(getAllBrands());
     }, [dispatch]);
+
+    // useEffect(() => {
+    //     return () => {
+    //         dispatch(clearProductAdd());
+    //     };
+    // }, [dispatch]);
 
     return (
         <DashboardLayout title='Add product'>
@@ -118,7 +140,7 @@ const AddProduct = props => {
                                 </Select>
                                 {formik.errors.brand && formik.touched.brand ? (
                                     <FormHelperText error={true}>
-                                        {formik.error.brand}
+                                        {formik.errors.brand}
                                     </FormHelperText>
                                 ) : null}
                             </FormControl>
@@ -188,7 +210,7 @@ const AddProduct = props => {
                                 {formik.errors.shipping &&
                                 formik.touched.shipping ? (
                                     <FormHelperText error={true}>
-                                        {formik.error.shipping}
+                                        {formik.errors.shipping}
                                     </FormHelperText>
                                 ) : null}
                             </FormControl>
