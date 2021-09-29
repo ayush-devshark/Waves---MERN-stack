@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import PickUpload from './upload';
 import DashboardLayout from 'hoc/DashboardLayout';
+
 import { useFormik } from 'formik';
 import { errorHelper } from 'utils/tools';
 import Loader from 'utils/loader';
@@ -8,7 +10,7 @@ import { validation } from './formValues';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllBrands } from 'store/actions/brands.actions';
 import { addProduct } from 'store/actions/products.actions';
-import { clearProductAdd } from 'store/actions';
+// import { clearProductAdd } from 'store/actions';
 
 import {
     TextField,
@@ -73,6 +75,8 @@ const AddProduct = props => {
                 <Loader />
             ) : (
                 <>
+                    <PickUpload />
+                    <Divider className='mt-3 mb-3' />
                     <form
                         className='mt-3 article_form'
                         onSubmit={formik.handleSubmit}

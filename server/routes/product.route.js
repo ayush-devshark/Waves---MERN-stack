@@ -19,5 +19,7 @@ router
 
 router.get('/all', productController.getAllProducts);
 
+router.post('/upload', auth('createAny', 'product'));
+
 router.post('/paginate/all', productController.paginateProducts);
 module.exports = router;
