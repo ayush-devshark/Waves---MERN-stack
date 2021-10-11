@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PickUpload from './upload';
+import PickViewer from './picViewer';
 import DashboardLayout from 'hoc/DashboardLayout';
 
 import { useFormik } from 'formik';
@@ -57,7 +58,11 @@ const AddProduct = props => {
         formik.setFieldValue('images', picArray);
     };
 
-    console.log(formik.values);
+    const deletePic = idx => {
+        const picArray = formik.values.images;
+        picArray.splice(idx, 1);
+        formik.setFieldValue('images', picArray);
+    };
 
     useEffect(() => {
         if (notifications && notifications.success) {
@@ -84,6 +89,10 @@ const AddProduct = props => {
                 <Loader />
             ) : (
                 <>
+                    <PickViewer
+                        formik={formik}
+                        deletePic={idx => deletePic(idx)}
+                    />
                     <PickUpload
                         picValue={pic => {
                             handlePicValue(pic);
