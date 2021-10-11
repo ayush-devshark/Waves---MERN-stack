@@ -2,6 +2,13 @@ const Product = require('../models/product');
 const { APIError } = require('../middleware/apiError');
 const httpStatus = require('http-status');
 const mongoose = require('mongoose');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: `${process.env.CLOUD_NAME}`,
+    api_key: `${process.env.API_KEY}`,
+    api_secret: `${process.env.API_SECRET}`,
+});
 
 const addProduct = async body => {
     try {
@@ -127,6 +134,21 @@ const paginateProducts = async req => {
     }
 };
 
+const picUpload = async req => {
+    try {
+        const upload = await cloudinary.uploader.upload(req.files.file.path, {
+            public_id: `${Date.now()}`,
+            folder: `waves_upload`,
+        });
+        return {
+            public_id: upload.public_id,
+            url: upload.url,
+        };
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
     addProduct,
     getProductById,
@@ -134,4 +156,5 @@ module.exports = {
     deleteProductById,
     getAllProducts,
     paginateProducts,
+    picUpload,
 };

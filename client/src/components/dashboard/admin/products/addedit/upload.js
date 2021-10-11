@@ -3,10 +3,10 @@ import { Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { getTokenCookie } from 'utils/tools';
+import { getAuthHeader, getTokenCookie } from 'utils/tools';
 import Loader from 'utils/loader';
 
-const PickUpload = () => {
+const PickUpload = ({ picValue }) => {
     const [loading, setLoading] = useState(false);
     const formikImg = useFormik({
         initialValues: { pic: '' },
@@ -19,13 +19,13 @@ const PickUpload = () => {
             formData.append('file', values.pic);
 
             axios
-                .post(`api/products/upload`, formData, {
-                    header: {
+                .post(`/api/products/upload`, formData, {
+                    headers: {
                         'content-type': 'multipart/form-data',
                         Authorization: `Bearer ${getTokenCookie()}`,
                     },
                 })
-                .then(res => console.log(res))
+                .then(res => picValue(res.data))
                 .catch(err => alert(err))
                 .finally(() => {
                     setLoading(false);

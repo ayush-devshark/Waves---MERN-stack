@@ -3,6 +3,7 @@ const router = express.Router();
 const productController = require('../controllers/product.controller');
 const auth = require('../middleware/auth');
 const { addProductValidator } = require('../middleware/validations');
+const formidableMiddleware = require('express-formidable');
 
 router.post(
     '/',
@@ -19,7 +20,12 @@ router
 
 router.get('/all', productController.getAllProducts);
 
-router.post('/upload', auth('createAny', 'product'));
+router.post(
+    '/upload',
+    auth('createAny', 'product'),
+    formidableMiddleware(),
+    productController.picUpload
+);
 
 router.post('/paginate/all', productController.paginateProducts);
 module.exports = router;

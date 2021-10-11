@@ -38,6 +38,7 @@ const AddProduct = props => {
             price: '',
             available: '',
             shipping: false,
+            images: [],
         },
         validationSchema: validation,
         onSubmit: values => {
@@ -49,6 +50,14 @@ const AddProduct = props => {
         setLoading(true);
         dispatch(addProduct(values));
     };
+
+    const handlePicValue = pic => {
+        const picArray = formik.values.images;
+        picArray.push(pic.url);
+        formik.setFieldValue('images', picArray);
+    };
+
+    console.log(formik.values);
 
     useEffect(() => {
         if (notifications && notifications.success) {
@@ -75,7 +84,11 @@ const AddProduct = props => {
                 <Loader />
             ) : (
                 <>
-                    <PickUpload />
+                    <PickUpload
+                        picValue={pic => {
+                            handlePicValue(pic);
+                        }}
+                    />
                     <Divider className='mt-3 mb-3' />
                     <form
                         className='mt-3 article_form'

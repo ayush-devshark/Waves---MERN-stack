@@ -59,6 +59,15 @@ const productController = {
             next(err);
         }
     },
+
+    picUpload: async (req, res, next) => {
+        try {
+            const pic = await productService.picUpload(req);
+            res.json(pic);
+        } catch (err) {
+            next(err);
+        }
+    },
 };
 
 module.exports = productController;
