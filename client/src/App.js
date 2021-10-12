@@ -16,6 +16,7 @@ import Dashboard from 'components/dashboard';
 import UserInfo from 'components/dashboard/user/info';
 import AdminProducts from 'components/dashboard/admin/products';
 import AddProduct from 'components/dashboard/admin/products/addedit/add';
+import EditProduct from 'components/dashboard/admin/products/addedit/edit';
 
 function App(props) {
     const [loading, setLoading] = useState(true);
@@ -45,6 +46,10 @@ function App(props) {
                     <Header users={users} signoutUser={signoutUser} />
                     <MainLayout>
                         <Switch>
+                            <Route
+                                path='/dashboard/admin/edit_products/:id'
+                                component={AuthGuard(EditProduct)}
+                            />
                             <Route
                                 path='/dashboard/admin/add_products'
                                 component={AuthGuard(AddProduct)}

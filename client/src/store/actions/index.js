@@ -2,6 +2,7 @@ import {
     GET_PROD_BY_SOLD,
     GET_PROD_BY_DATE,
     GET_PROD_PAGINATE,
+    GET_PROD_BY_ID,
     REMOVE_PRODUCT,
     ADD_PRODUCT,
     CLEAR_PRODUCT_ADD,
@@ -62,6 +63,11 @@ export const productAdd = product => ({
 
 export const clearProductAdd = () => ({
     type: CLEAR_PRODUCT_ADD,
+});
+
+export const productById = product => ({
+    type: GET_PROD_BY_ID,
+    payload: product,
 });
 
 // Brands

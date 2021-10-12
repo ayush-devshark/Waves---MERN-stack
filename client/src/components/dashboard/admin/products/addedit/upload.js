@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { getAuthHeader, getTokenCookie } from 'utils/tools';
+import { getTokenCookie } from 'utils/tools';
 import Loader from 'utils/loader';
 
 const PickUpload = ({ picValue }) => {

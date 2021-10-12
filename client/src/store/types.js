@@ -5,6 +5,7 @@ export const GET_PROD_PAGINATE = 'get_prod_paginate';
 export const REMOVE_PRODUCT = 'remove_product';
 export const ADD_PRODUCT = 'add_product';
 export const CLEAR_PRODUCT_ADD = 'clear_product_add';
+export const GET_PROD_BY_ID = 'get_prod_by_id';
 
 // Notifications
 export const ERROR_GLOBAL = 'error_global';

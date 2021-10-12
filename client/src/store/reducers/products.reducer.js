@@ -2,6 +2,7 @@ import {
     GET_PROD_BY_SOLD,
     GET_PROD_BY_DATE,
     GET_PROD_PAGINATE,
+    GET_PROD_BY_ID,
     ADD_PRODUCT,
     CLEAR_PRODUCT_ADD,
 } from '../types';
@@ -20,6 +21,8 @@ const productsReducer = (state = DEFAULT_PRODUCTS_STATE, { type, payload }) => {
             return { ...state, lastAdded: payload };
         case CLEAR_PRODUCT_ADD:
             return { ...state, lastAdded: null };
+        case GET_PROD_BY_ID:
+            return { ...state, byId: payload };
         default:
             return state;
     }
