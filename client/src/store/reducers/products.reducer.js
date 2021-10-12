@@ -5,6 +5,7 @@ import {
     GET_PROD_BY_ID,
     ADD_PRODUCT,
     CLEAR_PRODUCT_ADD,
+    CLEAR_CURRENT_PRODUCT,
 } from '../types';
 
 let DEFAULT_PRODUCTS_STATE = {};
@@ -23,6 +24,8 @@ const productsReducer = (state = DEFAULT_PRODUCTS_STATE, { type, payload }) => {
             return { ...state, lastAdded: null };
         case GET_PROD_BY_ID:
             return { ...state, byId: payload };
+        case CLEAR_CURRENT_PRODUCT:
+            return { ...state, byId: null };
         default:
             return state;
     }

@@ -6,6 +6,7 @@ import {
     REMOVE_PRODUCT,
     ADD_PRODUCT,
     CLEAR_PRODUCT_ADD,
+    CLEAR_CURRENT_PRODUCT,
     ERROR_GLOBAL,
     SUCCESS_GLOBAL,
     CLEAR_NOTIFICATIONS,
@@ -68,6 +69,10 @@ export const clearProductAdd = () => ({
 export const productById = product => ({
     type: GET_PROD_BY_ID,
     payload: product,
+});
+
+export const clearCurrentProduct = () => ({
+    type: CLEAR_CURRENT_PRODUCT,
 });
 
 // Brands

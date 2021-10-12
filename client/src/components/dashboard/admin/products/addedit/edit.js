@@ -10,8 +10,8 @@ import { validation, formValues, getValuesToEdit } from './formValues';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllBrands } from 'store/actions/brands.actions';
-import { addProduct, productById } from 'store/actions/products.actions';
-// import { clearProductAdd } from 'store/actions';
+import { editProduct, productById } from 'store/actions/products.actions';
+import { clearCurrentProduct } from 'store/actions';
 
 import {
     TextField,
@@ -42,7 +42,7 @@ const EditProduct = props => {
 
     const handleSubmit = values => {
         setLoading(true);
-        dispatch(addProduct(values));
+        dispatch(editProduct(values, props.match.params.id));
     };
 
     const handlePicValue = pic => {
@@ -58,13 +58,10 @@ const EditProduct = props => {
     };
 
     useEffect(() => {
-        if (notifications && notifications.success) {
-            props.history.push('dashboard/admin/admin_products');
-        }
-        if (notifications && notifications.error) {
+        if (notifications) {
             setLoading(false);
         }
-    }, [notifications, props.history]);
+    }, [notifications]);
 
     useEffect(() => {
         const params = props.match.params.id;
@@ -80,11 +77,11 @@ const EditProduct = props => {
         }
     }, [products]);
 
-    // useEffect(() => {
-    //     return () => {
-    //         dispatch(clearProductAdd());
-    //     };
-    // }, [dispatch]);
+    useEffect(() => {
+        return () => {
+            dispatch(clearCurrentProduct());
+        };
+    }, [dispatch]);
 
     return (
         <DashboardLayout title='Add product'>
@@ -252,7 +249,7 @@ const EditProduct = props => {
                             type='submit'
                             className='mt-3'
                         >
-                            Add product
+                            Edit product
                         </Button>
                     </form>
                 </>
