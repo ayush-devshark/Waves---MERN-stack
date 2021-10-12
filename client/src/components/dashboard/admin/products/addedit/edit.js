@@ -6,7 +6,7 @@ import DashboardLayout from 'hoc/DashboardLayout';
 import { useFormik } from 'formik';
 import { errorHelper } from 'utils/tools';
 import Loader from 'utils/loader';
-import { validation } from './formValues';
+import { validation, formValues, getValuesToEdit } from './formValues';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllBrands } from 'store/actions/brands.actions';
@@ -24,23 +24,16 @@ import {
 } from '@material-ui/core';
 
 const EditProduct = props => {
+    const [values, setValues] = useState(formValues);
     const [loading, setLoading] = useState(false);
+    const products = useSelector(state => state.products);
     const notifications = useSelector(state => state.notifications);
     const brands = useSelector(state => state.brands);
     const dispatch = useDispatch();
 
     const formik = useFormik({
-        initialValues: {
-            model: '',
-            brand: '',
-            frets: '',
-            woodtype: '',
-            description: '',
-            price: '',
-            available: '',
-            shipping: false,
-            images: [],
-        },
+        enableReinitialize: true,
+        initialValues: values,
         validationSchema: validation,
         onSubmit: values => {
             handleSubmit(values);
@@ -80,6 +73,12 @@ const EditProduct = props => {
             dispatch(productById(params));
         }
     }, [dispatch, props.match.params.id]);
+
+    useEffect(() => {
+        if (products && products.byId) {
+            setValues(getValuesToEdit(products.byId));
+        }
+    }, [products]);
 
     // useEffect(() => {
     //     return () => {

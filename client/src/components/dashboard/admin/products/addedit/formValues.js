@@ -1,3 +1,4 @@
+import { productsByDate } from 'store/actions';
 import * as Yup from 'yup';
 
 export const formValues = {
@@ -9,6 +10,21 @@ export const formValues = {
     price: '',
     available: '',
     shipping: false,
+    images: [],
+};
+
+export const getValuesToEdit = product => {
+    return {
+        model: product.model,
+        brand: product.brand._id,
+        frets: product.frets,
+        woodtype: product.woodtype,
+        description: product.description,
+        price: product.price,
+        available: product.available,
+        shipping: product.shipping,
+        images: product.images,
+    };
 };
 
 export const validation = () =>
