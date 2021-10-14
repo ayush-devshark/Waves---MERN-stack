@@ -11,6 +11,7 @@ import Header from 'components/navigation/Header';
 import Footer from 'components/navigation/Footer';
 import Home from 'components/home';
 import RegisterLogin from 'components/auth';
+import Shop from 'components/shop';
 
 import Dashboard from 'components/dashboard';
 import UserInfo from 'components/dashboard/user/info';
@@ -66,6 +67,7 @@ function App(props) {
                                 path='/dashboard'
                                 component={AuthGuard(Dashboard)}
                             />
+                            <Route path='/shop' component={Shop} />
                             <Route path='/sign_in' component={RegisterLogin} />
                             <Route path='/' exact component={Home} />
                         </Switch>
