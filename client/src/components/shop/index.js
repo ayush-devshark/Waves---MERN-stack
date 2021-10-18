@@ -3,6 +3,7 @@ import CardBlocks from 'utils/products/cardblocks';
 import PaginateNav from 'utils/paginateNav';
 import SearchBar from './searchBar';
 import CollapseCheckbox from './CollapseCheckbox';
+import RangeSelect from './RangeSelect';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { productsByPaginate } from 'store/actions/products.actions';
@@ -63,6 +64,10 @@ const Shop = () => {
         }
     };
 
+    const handleRange = values => {
+        setSearchValues({ min: values[0], max: values[1], page: 1 });
+    };
+
     return (
         <div className='page_container'>
             <div className='page_top'>
@@ -96,6 +101,10 @@ const Shop = () => {
                             handleFilters={filters =>
                                 handleFilters(filters, 'frets')
                             }
+                        />
+                        <RangeSelect
+                            title='Price range'
+                            handleRange={values => handleRange(values)}
                         />
                     </div>
                     <div className='right'>
