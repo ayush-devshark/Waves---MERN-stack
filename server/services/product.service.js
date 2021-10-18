@@ -90,7 +90,7 @@ const paginateProducts = async req => {
             aggQueryArr.push({ $match: { brand: { $in: newBrandsArr } } });
         }
 
-        // query - frets
+        // query -  ts
         if (req.body.frets && req.body.frets.length > 0) {
             aggQueryArr.push({ $match: { frets: { $in: req.body.frets } } });
         }

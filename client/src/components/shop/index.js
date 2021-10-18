@@ -58,6 +58,9 @@ const Shop = () => {
         if (category === 'brands') {
             setSearchValues({ brand: filters, page: 1 });
         }
+        if (category === 'frets') {
+            setSearchValues({ frets: filters, page: 1 });
+        }
     };
 
     return (
@@ -78,6 +81,20 @@ const Shop = () => {
                             list={brands.all}
                             handleFilters={filters =>
                                 handleFilters(filters, 'brands')
+                            }
+                        />
+                        <CollapseCheckbox
+                            initialState={false}
+                            title='Frets'
+                            list={[
+                                { _id: 20, name: 20 },
+                                { _id: 21, name: 21 },
+                                { _id: 22, name: 22 },
+                                { _id: 23, name: 23 },
+                                { _id: 24, name: 24 },
+                            ]}
+                            handleFilters={filters =>
+                                handleFilters(filters, 'frets')
                             }
                         />
                     </div>
