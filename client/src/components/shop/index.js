@@ -2,6 +2,7 @@ import React, { useEffect, useState, useReducer } from 'react';
 import CardBlocks from 'utils/products/cardblocks';
 import PaginateNav from 'utils/paginateNav';
 import SearchBar from './searchBar';
+import CollapseCheckbox from './CollapseCheckbox';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { productsByPaginate } from 'store/actions/products.actions';
@@ -53,6 +54,12 @@ const Shop = () => {
         setSearchValues({ keywords: value });
     };
 
+    const handleFilters = (filters, category) => {
+        if (category === 'brands') {
+            setSearchValues({ brand: filters, page: 1 });
+        }
+    };
+
     return (
         <div className='page_container'>
             <div className='page_top'>
@@ -64,7 +71,16 @@ const Shop = () => {
             </div>
             <div className='container'>
                 <div className='show_wrapper'>
-                    <div className='left'>collapse for brand</div>
+                    <div className='left'>
+                        <CollapseCheckbox
+                            initialState={true}
+                            title='Brands'
+                            list={brands.all}
+                            handleFilters={filters =>
+                                handleFilters(filters, 'brands')
+                            }
+                        />
+                    </div>
                     <div className='right'>
                         <div className='shop_options'>
                             <div className='shop_grids clear'>
