@@ -32,13 +32,24 @@ export const WavesButton = props => {
                 </div>
             );
             break;
+        case 'add_to_cart_link':
+            template = (
+                <div
+                    className='add_to_cart_link'
+                    onClick={() => props.runAction()}
+                >
+                    <AddShoopingCartIcon />
+                    Add to cart
+                </div>
+            );
+            break;
         default:
             template = '';
     }
     return template;
 };
 
-export const renderCardImage = image => {
+export const renderCartImage = image => {
     if (image.length > 0) {
         return image[0];
     } else {

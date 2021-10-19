@@ -18,6 +18,7 @@ import UserInfo from 'components/dashboard/user/info';
 import AdminProducts from 'components/dashboard/admin/products';
 import AddProduct from 'components/dashboard/admin/products/addedit/add';
 import EditProduct from 'components/dashboard/admin/products/addedit/edit';
+import ProductDetail from 'components/product';
 
 function App(props) {
     const [loading, setLoading] = useState(true);
@@ -66,6 +67,10 @@ function App(props) {
                             <Route
                                 path='/dashboard'
                                 component={AuthGuard(Dashboard)}
+                            />
+                            <Route
+                                path='/product_detail/:id'
+                                component={ProductDetail}
                             />
                             <Route path='/shop' component={Shop} />
                             <Route path='/sign_in' component={RegisterLogin} />

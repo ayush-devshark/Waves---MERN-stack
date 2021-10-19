@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderCardImage, WavesButton } from '../tools';
+import { renderCartImage, WavesButton } from '../tools';
 
 const Card = props => {
     const handleAddToCart = () => {
@@ -11,7 +11,7 @@ const Card = props => {
             <div
                 className='image'
                 style={{
-                    background: `url(${renderCardImage(props.item.images)})`,
+                    background: `url(${renderCartImage(props.item.images)})`,
                 }}
             ></div>
             <div className='action_container'>
