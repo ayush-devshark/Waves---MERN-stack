@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './card';
+import Card from './cart';
 
 const CardBlock = ({ items, title, shop, grid }) => {
     const renderCards = () =>

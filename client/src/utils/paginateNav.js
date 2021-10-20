@@ -6,9 +6,9 @@ const PaginateComponent = ({ prods, prev, next, resetSearch }) => {
         prev(page);
     };
 
-    const goToNextPage = page => {
-        next(page);
-    };
+    // const goToNextPage = page => {
+    //     next(page);
+    // };
 
     return (
         <>

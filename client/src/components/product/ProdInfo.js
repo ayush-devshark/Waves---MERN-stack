@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { WavesButton } from 'utils/tools';
 
 import LocalShipingIcon from '@material-ui/icons/LocalShipping';
 import DoneOutlinedIcon from '@material-ui/icons/DoneOutline';
-import SentimentalVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+// import SentimentalVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 
 const ProdInfo = props => {
     const detail = props.detail;
