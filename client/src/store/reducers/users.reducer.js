@@ -3,6 +3,7 @@ import {
     SIGN_OUT,
     UPDATE_USER_PROFILE,
     USER_CHANGE_EMAIL,
+    USER_ADD_TO_CART,
 } from '../types';
 
 let DEFAULT_USER_STATE = {
@@ -39,6 +40,8 @@ const userReducer = (state = DEFAULT_USER_STATE, { type, payload }) => {
 
         case USER_CHANGE_EMAIL:
             return { ...state, data: { ...state.data, email: payload } };
+        case USER_ADD_TO_CART:
+            return { ...state, cart: payload };
         default:
             return state;
     }

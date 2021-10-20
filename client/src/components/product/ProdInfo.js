@@ -1,16 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { WavesButton } from 'utils/tools';
+import AddToCartHandler from 'utils/AddToCartHandler';
 
 import LocalShipingIcon from '@material-ui/icons/LocalShipping';
 import DoneOutlinedIcon from '@material-ui/icons/DoneOutline';
-// import SentimentalVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import SentimentalVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { userAddToCart } from 'store/actions/users.actions';
 
 const ProdInfo = props => {
+    const [modal, setModal] = useState(false);
+    const [errorType, setErrorType] = useState(null);
+    const user = useSelector(state => state.users);
+    const dispatch = useDispatch();
+
     const detail = props.detail;
-    console.log({ detail });
-    // const dispatch = useDispatch();
+
+    const handleAddToCart = item => {
+        if (!user.auth) {
+            setModal(true);
+            setErrorType('auth');
+            return false;
+        }
+        if (!user.data.verified) {
+            setModal(true);
+            setErrorType('verify');
+            return false;
+        }
+        dispatch(userAddToCart(item));
+    };
+
+    const handleClose = () => {
+        setModal(false);
+    };
 
     const showProdTags = detail => (
         <div className='product_tags'>
@@ -38,7 +61,7 @@ const ProdInfo = props => {
                 </div>
             ) : (
                 <div className='tag'>
-                    <div>{DoneOutlinedIcon}</div>
+                    <div>{SentimentalVeryDissatisfiedIcon}</div>
                     <div className='tag_text'>
                         <div>Sorry product not available.</div>
                     </div>
@@ -51,7 +74,10 @@ const ProdInfo = props => {
         <div className='product_actions'>
             <div className='price'>$ {detail.price}</div>
             <div className='cart'>
-                <WavesButton type='add_to_cart_link' runAction={() => null} />
+                <WavesButton
+                    type='add_to_cart_link'
+                    runAction={() => handleAddToCart(detail)}
+                />
             </div>
         </div>
     );
@@ -79,6 +105,11 @@ const ProdInfo = props => {
             {/* {showProdTags(detail)} */}
             {showProdActions(detail)}
             {showProdSpecs(detail)}
+            <AddToCartHandler
+                modal={modal}
+                errorType={errorType}
+                handleClose={handleClose}
+            />
         </div>
     );
 };

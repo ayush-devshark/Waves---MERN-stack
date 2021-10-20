@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { renderCartImage, WavesButton } from '../tools';
-import { useDispatch, useSelector } from 'react-redux';
-
 import AddToCartHandler from 'utils/AddToCartHandler';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { userAddToCart } from 'store/actions/users.actions';
 
 const Cart = props => {
     const [modal, setModal] = useState(false);
@@ -21,7 +22,7 @@ const Cart = props => {
             setErrorType('verify');
             return false;
         }
-        alert('dispatch');
+        dispatch(userAddToCart(item));
     };
 
     const handleClose = () => {

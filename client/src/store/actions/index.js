@@ -14,6 +14,7 @@ import {
     SIGN_OUT,
     UPDATE_USER_PROFILE,
     USER_CHANGE_EMAIL,
+    USER_ADD_TO_CART,
     GET_ALL_BRANDS,
 } from 'store/types';
 
@@ -34,6 +35,11 @@ export const userUpdateProfile = userData => ({
 
 export const userChangeEmail = data => ({
     type: USER_CHANGE_EMAIL,
+    payload: data,
+});
+
+export const userAddToCart = data => ({
+    type: USER_ADD_TO_CART,
     payload: data,
 });
 
