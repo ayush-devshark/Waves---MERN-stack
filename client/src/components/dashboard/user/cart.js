@@ -15,6 +15,12 @@ const UserCart = props => {
         dispatch(userRemoveFromCart(position));
     };
 
+    const calculateTotal = () => {
+        let total = 0;
+        props.users.cart.forEach(item => (total += parseInt(item.price, 10)));
+        return total;
+    };
+
     return (
         <DashboardLayout title='Your Cart'>
             {props.users.cart && props.users.cart.length > 0 ? (
@@ -23,6 +29,9 @@ const UserCart = props => {
                         products={props.users.cart}
                         removeItem={position => removeItem(position)}
                     />
+                    <div className='user_cart_sum'>
+                        <div>Total amount: ${calculateTotal()}</div>
+                    </div>
                 </>
             ) : (
                 <div>There is nothing in your cart</div>
