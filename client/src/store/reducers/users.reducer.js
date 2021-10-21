@@ -4,6 +4,7 @@ import {
     UPDATE_USER_PROFILE,
     USER_CHANGE_EMAIL,
     USER_ADD_TO_CART,
+    PURCHASE_SUCCESS,
 } from '../types';
 
 let DEFAULT_USER_STATE = {
@@ -34,7 +35,6 @@ const userReducer = (state = DEFAULT_USER_STATE, { type, payload }) => {
                 data: { ...DEFAULT_USER_STATE.data },
                 auth: false,
             };
-
         case UPDATE_USER_PROFILE:
             return { ...state, data: { ...payload } };
 
@@ -42,6 +42,12 @@ const userReducer = (state = DEFAULT_USER_STATE, { type, payload }) => {
             return { ...state, data: { ...state.data, email: payload } };
         case USER_ADD_TO_CART:
             return { ...state, cart: payload };
+        case PURCHASE_SUCCESS:
+            return {
+                ...state,
+                cart: [],
+                data: { ...state.data, history: payload.history },
+            };
         default:
             return state;
     }

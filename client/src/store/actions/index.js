@@ -15,6 +15,7 @@ import {
     UPDATE_USER_PROFILE,
     USER_CHANGE_EMAIL,
     USER_ADD_TO_CART,
+    PURCHASE_SUCCESS,
     GET_ALL_BRANDS,
 } from 'store/types';
 
@@ -41,6 +42,11 @@ export const userChangeEmail = data => ({
 export const userAddToCart = data => ({
     type: USER_ADD_TO_CART,
     payload: data,
+});
+
+export const userPurchaseSuccess = data => ({
+    type: PURCHASE_SUCCESS,
+    paylodad: data,
 });
 
 // Products Actions
