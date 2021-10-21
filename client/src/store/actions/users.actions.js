@@ -126,3 +126,15 @@ export const userAddToCart = item => {
         }
     };
 };
+
+export const userRemoveFromCart = position => {
+    return (dispatch, getState) => {
+        try {
+            const cart = getState().users.cart;
+            cart.splice(position, 1);
+            dispatch(actions.userAddToCart(cart));
+        } catch (err) {
+            dispatch(actions.errorGlobal(err.response.data.message));
+        }
+    };
+};
