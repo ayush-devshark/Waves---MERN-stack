@@ -4,3 +4,4 @@ module.exports.emailService = require('./email.service');
 module.exports.brandService = require('./brand.service');
 module.exports.productService = require('./product.service');
 module.exports.siteService = require('./site.service');
+module.exports.transactionService = require('./transaction.service');
