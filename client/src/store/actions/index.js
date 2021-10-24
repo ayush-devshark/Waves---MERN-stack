@@ -18,6 +18,7 @@ import {
     PURCHASE_SUCCESS,
     GET_ALL_BRANDS,
     GET_SITE_VARS,
+    UPDATE_SITE_VARS
 } from 'store/types';
 
 // User Action
@@ -114,5 +115,10 @@ export const clearNotification = () => {
 
 export const siteGetVars = vars => ({
     type: GET_SITE_VARS,
+    payload: vars,
+});
+
+export const updateSiteVars = vars => ({
+    type: UPDATE_SITE_VARS,
     payload: vars,
 });

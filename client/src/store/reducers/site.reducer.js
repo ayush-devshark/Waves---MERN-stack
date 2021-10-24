@@ -1,4 +1,4 @@
-import { GET_SITE_VARS } from '../types';
+import { GET_SITE_VARS, UPDATE_SITE_VARS } from '../types';
 
 const DEFAULT_SITE_STATE = {
     vars: {
@@ -13,6 +13,8 @@ const DEFAULT_SITE_STATE = {
 const siteReducer = (state = DEFAULT_SITE_STATE, { type, payload }) => {
     switch (type) {
         case GET_SITE_VARS:
+            return { ...state, vars: payload };
+        case UPDATE_SITE_VARS:
             return { ...state, vars: payload };
         default:
             return state;

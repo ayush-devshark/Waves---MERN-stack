@@ -20,6 +20,7 @@ import AddProduct from 'components/dashboard/admin/products/addedit/add';
 import EditProduct from 'components/dashboard/admin/products/addedit/edit';
 import ProductDetail from 'components/product';
 import UserCart from 'components/dashboard/user/cart';
+import ManageSite from 'components/dashboard/admin/site';
 
 function App(props) {
     const [loading, setLoading] = useState(true);
@@ -60,6 +61,10 @@ function App(props) {
                             <Route
                                 path='/dashboard/admin/admin_products'
                                 component={AuthGuard(AdminProducts)}
+                            />
+                            <Route
+                                path='/dashboard/admin/manage_site'
+                                component={AuthGuard(ManageSite)}
                             />
                             <Route
                                 path='/dashboard/user/user_cart'
