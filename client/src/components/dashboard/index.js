@@ -1,5 +1,6 @@
 import React from 'react';
 import DashboardLayout from 'hoc/DashboardLayout';
+import HistoryBlock from 'utils/HistoryBlock';
 
 const UserDashboard = ({ users }) => {
     return (
@@ -13,7 +14,7 @@ const UserDashboard = ({ users }) => {
                         <div className='user_nfo_panel'>
                             <h1>History of purchases</h1>
                             <div className='user_product_block_wrapper'>
-                                history
+                                <HistoryBlock history={users.data.history} />
                             </div>
                         </div>
                     ) : null}

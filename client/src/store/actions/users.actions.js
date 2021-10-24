@@ -147,10 +147,11 @@ export const userPurchaseSuccess = orderID => {
                 { orderID },
                 getAuthHeader()
             );
+            console.log({ user });
             dispatch(actions.successGlobal('Thank you :)'));
-            dispatch(actions.userPurchaseSuccess(user.data));
+            dispatch(actions.userPurchaseSuccess(user?.data));
         } catch (err) {
-            dispatch(actions.errorGlobal(err.response.data.message));
+            dispatch(actions.errorGlobal(err.response?.data.message));
         }
     };
 };

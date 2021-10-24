@@ -4,7 +4,10 @@ import Loader from 'utils/loader';
 import CartDetails from './CartDetails';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { userRemoveFromCart } from 'store/actions/users.actions';
+import {
+    userRemoveFromCart,
+    userPurchaseSuccess,
+} from 'store/actions/users.actions';
 
 import { PayPalButton } from 'react-paypal-button-v2';
 
@@ -51,6 +54,15 @@ const UserCart = props => {
         return items;
     };
 
+    useEffect(() => {
+        if (notifications && notifications.success) {
+            props.history.push('/dashboard');
+        }
+        if (notifications && notifications.error) {
+            setLoading(false);
+        }
+    }, [notifications, props.history]);
+
     return (
         <DashboardLayout title='Your Cart'>
             {props.users.cart && props.users.cart.length > 0 ? (
@@ -82,7 +94,8 @@ const UserCart = props => {
                                     });
                                 }}
                                 onSuccess={(details, data) => {
-                                    console.log({ details, data });
+                                    // console.log({ details, data });
+                                    dispatch(userPurchaseSuccess(details.id));
                                     setLoading(true);
                                 }}
                                 onCancel={data => {
