@@ -17,6 +17,7 @@ import {
     USER_ADD_TO_CART,
     PURCHASE_SUCCESS,
     GET_ALL_BRANDS,
+    GET_SITE_VARS,
 } from 'store/types';
 
 // User Action
@@ -108,3 +109,10 @@ export const clearNotification = () => {
         dispatch({ type: CLEAR_NOTIFICATIONS });
     };
 };
+
+// Site
+
+export const siteGetVars = vars => ({
+    type: GET_SITE_VARS,
+    payload: vars,
+});
