@@ -10,7 +10,7 @@ const { jwtStrategy } = require('./middleware/passport');
 
 const { handleError, convertToAPIError } = require('./middleware/apiError');
 
-const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}?retryWrites=true&w=majority`;
+const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}?retryWrites=true&w=majority&ssl=true`;
 
 mongoose
     .connect(mongoUri, {
@@ -47,8 +47,8 @@ app.use((err, req, res, next) => {
     handleError(err, res);
 });
 
-app.use(express.static('client/build'));
 if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
     const path = require('path');
     app.get('/*', (req, res) => {
         res.sendFile(
