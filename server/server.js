@@ -12,12 +12,17 @@ const { handleError, convertToAPIError } = require('./middleware/apiError');
 
 const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}?retryWrites=true&w=majority`;
 
-mongoose.connect(mongoUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-});
+mongoose
+    .connect(mongoUri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+    })
+    .then(() => {
+        console.log('connected to monogo');
+    })
+    .catch(err => console.log(`No connection: ${err}`));
 
 // MIDDLEWARE
 // json parse
